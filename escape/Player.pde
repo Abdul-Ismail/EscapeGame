@@ -1,11 +1,14 @@
 class Player{
-  float xPlayer = width/2;
-  float yPlayer = height/2;
+  ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+  
   PImage character;
   float r = 0;
   PVector cords;
   int imgSize = 100;
   float rotate;
+  float playerSpeed = 5;
+  
+  float playerRotationWhenShotFired;
   
   Player(){
     character = loadImage("player.png");
@@ -24,21 +27,25 @@ class Player{
       r += 0.05;
       
   }
-
+  
 
 void movePlayer(){
     if(left){
-     cords.x = -0.5;
-     xPlayer += cords.x;
+     xPlayer -= playerSpeed;
   }if (right){
-      cords.x = 0.5;
-     xPlayer += cords.x;
+     xPlayer += playerSpeed;
   }if (up){
-    cords.y = -0.5;
-     yPlayer += cords.y;
+     yPlayer -= playerSpeed;
   }if (down){
-    cords.y = +0.5;
-     yPlayer += cords.y;
+     yPlayer += playerSpeed;
+  }
+  
+  if (bullets.size() > 0){
+    
+      for(int i = 0; i <bullets.size(); i++){
+        Bullet bullet = bullets.get(i);
+        bullet.drawBullet();
+      }
   }
 }
 
@@ -73,5 +80,13 @@ void movePlayer(){
       //4.7 left
       //5.2 left up 
  }
+ 
+        
+ void shootPressed(){
+       bullets.add(new Bullet());
+       Bullet bullet = bullets.get(bullets.size()-1);
+       playerRotationWhenShotFired = rotate;
+       bullet.bulletCords(xPlayer, yPlayer, playerRotationWhenShotFired);    
+}
 
 }

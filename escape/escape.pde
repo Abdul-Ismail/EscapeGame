@@ -2,6 +2,8 @@
 Player player;
 int x,y;
 static boolean right, left, up, down;
+static float xPlayer;
+static float yPlayer;
 
 void setup(){
   size(600, 600);
@@ -21,6 +23,7 @@ void keyPressed(){
   if (keyCode == LEFT)   left = true; 
   if (keyCode == UP)   up = true; 
   if (keyCode == DOWN)   down = true; 
+  if (key == 'a') player.shootPressed();
 
 }
 
