@@ -9,7 +9,7 @@ void setup(){
 }
 
 void draw(){
-  background(0);
+  background(255);
   player.drawPlayer();
   player.movePlayer();
 }
