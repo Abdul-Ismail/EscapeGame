@@ -4,7 +4,6 @@ class Bullet{
   float bulletSpeed;
   boolean shotRequested;
   float playerRotationWhenShotFired;
-  
   Bullet(){
     
   }
@@ -13,6 +12,14 @@ class Bullet{
    xBullet = x;
    yBullet = y;
    playerRotationWhenShotFired = r;
+  }
+  
+  float[] getBulletCords(){
+    float cords[] = new  float[2];
+     cords[0] = xBullet;
+     cords[1] = yBullet;
+     return cords;
+       
   }
   
    void drawBullet(){

@@ -9,8 +9,8 @@ class Gaurd{
     int direction;
  
   Gaurd(){
-    xGaurd = 300;
-    yGaurd = 300;
+    xGaurd = random(0, 500);
+    yGaurd = random(0, 500);
     speed = random(1,10);
     gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
@@ -78,4 +78,12 @@ class Gaurd{
 
   }
   }
+  
+   void gaurdHit(float x, float y, int j, int i){
+        float d = dist(xGaurd, yGaurd, x, y);
+        if (d <20){
+          gaurds.remove(j);
+          bullets.remove(i);
+        }
+ }
 }

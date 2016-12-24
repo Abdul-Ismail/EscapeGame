@@ -36,7 +36,6 @@ void movePlayer(){
   }if (down){
      yPlayer += playerSpeed;
   }
-  println(bullets.size());
 }
 
  void rotatePlayer(){
