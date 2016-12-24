@@ -41,4 +41,10 @@ class Bullet{
          }   
          
       }
+      
+    void checkBulletState(int i){
+         if (xBullet > width || xBullet < 0 || yBullet < 0 || yBullet > height){
+            bullets.remove(i);
+         }
+    }
 }
