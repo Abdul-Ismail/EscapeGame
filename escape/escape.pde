@@ -1,6 +1,7 @@
   ArrayList<Bullet> bullets = new ArrayList<Bullet>();
   
 Player player;
+Gaurd gaurd;
 int x,y;
 static boolean right, left, up, down;
 static float xPlayer;
@@ -10,6 +11,7 @@ static   float rotate;
 void setup(){
   size(600, 600);
   player = new Player();
+  gaurd = new Gaurd();
 }
 
 void draw(){
@@ -17,6 +19,7 @@ void draw(){
   player.drawPlayer();
   player.movePlayer();
   drawBulletinDraw();
+  gaurd.drawGaurd();
 }
 
 
