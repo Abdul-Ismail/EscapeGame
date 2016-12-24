@@ -2,14 +2,19 @@ class Gaurd{
     float xGaurd;
     float yGaurd; 
     float change;
-    float speed = 2;
-    float gaurdDistance = 100;
-    float gaurdRange = 300;
+    float speed;
+    float gaurdWalkDistance;
+    float gaurdRange;
     float r =3.9;
+    int direction;
  
   Gaurd(){
     xGaurd = 300;
     yGaurd = 300;
+    speed = random(1,10);
+    gaurdWalkDistance = random(50,400);
+    gaurdRange = random(50,300);
+    direction = 1;//int(random(0,1));
   }
   
   void drawGaurd(){
@@ -41,19 +46,36 @@ class Gaurd{
 
 
   void updateGaurd(){
-       
-    if (change < gaurdDistance){
-        if (r > 5.4  && r < 5.6){
-           xGaurd += speed;
-           change += speed;
-        }else r+=0.1;
-    
-  }else if (change < gaurdDistance*2){
-         if( r > 2.3 && r < 2.6){
-         xGaurd -= speed;
-         change += speed;
-         }else r += 0.1;
-    }else change = 0;
-    }
-  
+     
+    if (direction == 0){
+      
+          if (change < gaurdWalkDistance){
+              if (r > 5.4  && r < 5.6){
+                 xGaurd += speed;
+                 change += speed;
+              }else r+=0.1;
+          
+        }else if (change < gaurdWalkDistance*2 ){
+               if( r > 2.3 && r < 2.6){
+               xGaurd -= speed;
+               change += speed;
+               }else r += 0.1;
+          }else change = 0;
+          
+    }else{
+              if (change < gaurdWalkDistance){
+              if (r > 3.9  && r < 4.4){
+                 yGaurd -= speed;
+                 change += speed;
+              }else r+=0.1;
+          
+        }else if (change < gaurdWalkDistance*2 ){
+               if( r > 0.75 && r < 1.6){
+               yGaurd += speed;
+               change += speed;
+               }else r += 0.1;
+          }else change = 0;
+
+  }
+  }
 }

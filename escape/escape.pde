@@ -29,7 +29,7 @@ void keyPressed(){
   if (keyCode == LEFT)   left = true; 
   if (keyCode == UP)   up = true; 
   if (keyCode == DOWN)   down = true; 
-  if (key == 'a') shootPressed();
+  if (key == 'm') shootPressed();
 
 }
 
