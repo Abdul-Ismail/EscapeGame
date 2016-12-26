@@ -8,72 +8,73 @@ static float xPlayer;
 static float yPlayer;
 static   float rotate;
 
-void setup(){
-  size(600, 600);
-  player = new Player();
-  
-  gaurds.add(new Gaurd());
-
-}
-
-void draw(){
-  background(255);
-  player.drawPlayer();
-  player.movePlayer();
-  drawBulletinDraw();
-  
-  
-   for(int i = 0; i <gaurds.size(); i++){
-      Gaurd gaurd = gaurds.get(i);
-      gaurd.drawGaurd();
-   }
-}
-
-
-
-void keyPressed(){
-  if (keyCode == RIGHT)   right = true; 
-  if (keyCode == LEFT)   left = true; 
-  if (keyCode == UP)   up = true; 
-  if (keyCode == DOWN)   down = true; 
-  if (key == 'a') shootPressed();
-
-}
-
-void keyReleased(){
-  if (keyCode == RIGHT)   right = false; 
-  if (keyCode == LEFT)   left = false; 
-  if (keyCode == UP)   up = false; 
-  if (keyCode == DOWN)   down = false; 
-}
-
-
-void drawBulletinDraw(){
-  if (bullets.size() > 0){
-     
-      for(int i = 0; i <bullets.size(); i++){
-        float cords[] = new  float[2];
-        
-        Bullet bullet = bullets.get(i);
-        bullet.drawBullet();
-        cords = bullet.getBulletCords();
-        
-        for(int j = 0; j <gaurds.size(); j++){
-        Gaurd gaurd = gaurds.get(j);
-        gaurd.gaurdHit(cords[0], cords[1], j, i);
-        }
-  
-        bullet.checkBulletState(i);
-         //if (!bulletAlive){
-           //  bullets.remove(i);
-         //}
-      }
+  void setup(){
+      size(600, 600);
+      player = new Player();
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());  
   }
-}
 
+  void draw(){
+      background(255);
+      player.drawPlayer();
+      player.movePlayer();
+      drawBulletinDraw();
+  
+  
+         for(int i = 0; i <gaurds.size(); i++){
+            Gaurd gaurd = gaurds.get(i);
+            gaurd.drawGaurd(); //draw the gaurd
+         }
+  }
+
+
+
+  void keyPressed(){
+    if (keyCode == RIGHT)   right = true; 
+    if (keyCode == LEFT)   left = true; 
+    if (keyCode == UP)   up = true; 
+    if (keyCode == DOWN)   down = true; 
+    if (key == 'a') shootPressed();
+  
+  }
+  
+  void keyReleased(){
+    if (keyCode == RIGHT)   right = false; 
+    if (keyCode == LEFT)   left = false; 
+    if (keyCode == UP)   up = false; 
+    if (keyCode == DOWN)   down = false; 
+  }
+
+
+  void drawBulletinDraw(){
+    
+    if (bullets.size() > 0){
+     
+          for(int i = 0; i <bullets.size(); i++){
+                float cords[] = new  float[2]; //to stores bullet cords from getCords method
+     
+                Bullet bullet = bullets.get(i);
+                bullet.drawBullet();
+                cords = bullet.getBulletCords(); //getting bullet cords
+                  
+                  //checks if the bullet has hit the gaurd
+                  for(int j = 0; j <gaurds.size(); j++){
+                      Gaurd gaurd = gaurds.get(j);
+                      gaurd.gaurdHit(cords[0], cords[1], j, i); //bullet cords passed
+                    }
+  
+            bullet.checkBulletState(i);//if bullet is gona outside screen, arraylist is removed
+        }
+    }
+ }
+
+ //called when bullet button is pressed
  void shootPressed(){
-       bullets.add(new Bullet());
-       Bullet bullet = bullets.get(bullets.size()-1);
-       float playerRotationWhenShotFired = rotate;
-       bullet.bulletCords(xPlayer, yPlayer, playerRotationWhenShotFired);    
-}
+       bullets.add(new Bullet()); //adds bullet by adding arraylist
+       Bullet bullet = bullets.get(bullets.size()-1); //get the most recent bullet from list
+       float playerRotationWhenShotFired = rotate; //pass current player rotate position when bullet was fired to know which way bullet will go
+       bullet.bulletCords(xPlayer, yPlayer, playerRotationWhenShotFired); //bullet cords at start is based from the players position
+ }

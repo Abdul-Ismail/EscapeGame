@@ -9,16 +9,17 @@ class Bullet{
   }
   
   void bulletCords(float x, float y, float r){
-   xBullet = x;
-   yBullet = y;
-   playerRotationWhenShotFired = r;
+     xBullet = x;
+     yBullet = y;
+     playerRotationWhenShotFired = r;
   }
   
-  float[] getBulletCords(){
+  float[] getBulletCords(){  
     float cords[] = new  float[2];
      cords[0] = xBullet;
      cords[1] = yBullet;
-     return cords;
+    
+   return cords;
        
   }
   
