@@ -6,15 +6,23 @@ background_bg Background;
 int x,y;
 static boolean right, left, up, down;
 static float xPlayer;
-static float yPlayer;
-static   float rotate;
+static float yPlayer = 500;
+static float rotate;
 static PImage bg;
+static int xBG;
+static int yBG = 423;
 
   void setup(){
       size(600, 600);
       Player.character = loadImage("player.png");
       playerMove = new movePlayer();
       Background = new background_bg();
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
+       gaurds.add(new Gaurd());
        gaurds.add(new Gaurd());
   }
 

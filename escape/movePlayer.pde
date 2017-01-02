@@ -16,13 +16,13 @@ class movePlayer{
   
 
 void movePlayer(){
-    if(left){
+    if(left && xPlayer > 50){
      xPlayer -= Player.playerSpeed;
-  }if (right){
+  }if (right && xPlayer < 500){
      xPlayer += Player.playerSpeed;
-  }if (up){
+  }if (up && yPlayer >50){
      yPlayer -= Player.playerSpeed;
-  }if (down){
+  }if (down && yPlayer < 500){
      yPlayer += Player.playerSpeed;
   }
 }

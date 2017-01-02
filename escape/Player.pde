@@ -3,7 +3,7 @@ static class Player{
   static PImage character;
   //static float r = 0;
   static int imgSize = 100;
-  static float playerSpeed = 5;
+  static float playerSpeed = 10;
   static int lives = 13;
   static int bullets = 15;
   
@@ -14,8 +14,10 @@ static class Player{
   }
   
   static void reposition(){
-    xPlayer = 500;
-    yPlayer = 500;
+    xPlayer = 0;
+    yPlayer = 424;
+    xBG = 0;
+    yBG = 424;
 
   }
   

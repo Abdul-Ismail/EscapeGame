@@ -14,10 +14,12 @@ float newAngle;
 float x1, y1;
 float newArc;
 float angle = HALF_PI;
+float newXGaurd;
+float newYGaurd;
  
   Gaurd(){
-    xGaurd = random(0, 500);
-    yGaurd = random(0, 500);
+    xGaurd = random(0, 1024);
+    yGaurd = random(0, 1024);
     speed =  random(1,10);
     gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
@@ -29,8 +31,10 @@ float angle = HALF_PI;
 
      
       fill(0);
+      newXGaurd = xGaurd - xBG;
+      newYGaurd = yGaurd - yBG;
      pushMatrix();
-     translate(xGaurd, yGaurd);
+     translate(newXGaurd, newYGaurd);
       rotate(r);
      ellipse(0, 0, 30, 30);
      arc(0, 0, gaurdRange, gaurdRange, 0, HALF_PI);
@@ -127,7 +131,7 @@ mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  r;
 
     if ((sq(xPlayer - (xGaurd - (gaurdRange * 0.35))) + sq(yPlayer - (yGaurd - (gaurdRange * 0.35)))) <= sq(gaurdRange)){
      playerCaught = true;
-     Player.reposition();
+     //Player.reposition();
      Player.lives--;
      playerCaught = false;
       } else {
