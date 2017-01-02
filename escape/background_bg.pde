@@ -8,13 +8,13 @@ class background_bg{
   
   void updateBG(){
 
-    if (right && xBG < 424 && xPlayer > 490){
+    if (right && xBG < 424 ){
     xBG= xBG+3;
-    }if (left && xBG > 0 && xPlayer < 60){
+    }if (left && xBG > 0 ){
       xBG = xBG-3;
-    }if (down && yBG < 424 && yPlayer > 490){
+    }if (down && yBG < 424){
     yBG= yBG+3;
-    }if (up && yBG > 0 && yPlayer < 60){
+    }if (up && yBG > 0 ){
       yBG = yBG - 3;
     }
     
