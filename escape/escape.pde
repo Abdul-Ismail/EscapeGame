@@ -1,7 +1,7 @@
   ArrayList<Bullet> bullets = new ArrayList<Bullet>();
   ArrayList<Gaurd> gaurds = new ArrayList<Gaurd>();
   
-Player player;
+movePlayer playerMove;
 int x,y;
 static boolean right, left, up, down;
 static float xPlayer;
@@ -10,7 +10,8 @@ static   float rotate;
 
   void setup(){
       size(600, 600);
-      player = new Player();
+      Player.character = loadImage("player.png");
+      playerMove = new movePlayer();
        gaurds.add(new Gaurd());
        gaurds.add(new Gaurd());
        gaurds.add(new Gaurd());
@@ -19,9 +20,10 @@ static   float rotate;
 
   void draw(){
       background(255);
-      player.drawPlayer();
-      player.movePlayer();
+      playerMove.drawPlayer();
+      playerMove.movePlayer();
       drawBulletinDraw();
+      println(Player.lives, mouseX, mouseY);
   
   
          for(int i = 0; i <gaurds.size(); i++){
@@ -73,8 +75,12 @@ static   float rotate;
 
  //called when bullet button is pressed
  void shootPressed(){
+       if (Player.bullets > 0){
        bullets.add(new Bullet()); //adds bullet by adding arraylist
        Bullet bullet = bullets.get(bullets.size()-1); //get the most recent bullet from list
        float playerRotationWhenShotFired = rotate; //pass current player rotate position when bullet was fired to know which way bullet will go
        bullet.bulletCords(xPlayer, yPlayer, playerRotationWhenShotFired); //bullet cords at start is based from the players position
+       Player.bullets--;
+       }
+       
  }

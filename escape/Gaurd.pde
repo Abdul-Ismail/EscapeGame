@@ -16,12 +16,12 @@ float newArc;
 float angle = HALF_PI;
  
   Gaurd(){
-    xGaurd = 300;//random(0, 500);
-    yGaurd = 300;//random(0, 500);
-    speed = 0.5;//random(1,10);
-    gaurdWalkDistance = 200;//random(50,400);
+    xGaurd = random(0, 500);
+    yGaurd = random(0, 500);
+    speed =  random(1,10);
+    gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
-    direction = 0;//int(random(0,1));
+    direction = 1;//int(random(0,1));
   }
   
   void drawGaurd(){
@@ -73,13 +73,13 @@ float angle = HALF_PI;
           
     }else{
               if (change < gaurdWalkDistance){
-              if (r > 3.9  && r < 4.4){
+              if (r > -2.4  && r < -2.2){
                  yGaurd -= speed;
                  change += speed;
               }else r+=0.1;
           
         }else if (change < gaurdWalkDistance*2 ){
-               if( r > 0.75 && r < 1.6){
+               if( r < 0.8 && r > 0.7){
                yGaurd += speed;
                change += speed;
                }else r += 0.1;
@@ -98,7 +98,7 @@ float angle = HALF_PI;
  
  void gaurdCaughtPlayer(){
      
-mouseRadians = atan2(mouseY - yGaurd, mouseX - xGaurd) -  r; 
+mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  r; 
 
    
      //if the arc is between the two angles which reset
@@ -114,7 +114,7 @@ mouseRadians = atan2(mouseY - yGaurd, mouseX - xGaurd) -  r;
               PVector v2 = new PVector(x1, y1); 
               newArc = PVector.angleBetween(v1, v2) + 0.5;
              angle = newArc;
-               mouseRadians = atan2(mouseY - yGaurd, mouseX - xGaurd) -  -3.2; 
+               mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  -3.2; 
            }else{
               angle = HALF_PI;
            }
@@ -125,8 +125,11 @@ mouseRadians = atan2(mouseY - yGaurd, mouseX - xGaurd) -  r;
 
       }else fill(255);
 
-    if ((sq(mouseX - (xGaurd - (gaurdRange * 0.35))) + sq(mouseY - (yGaurd - (gaurdRange * 0.35)))) <= sq(gaurdRange)){
+    if ((sq(xPlayer - (xGaurd - (gaurdRange * 0.35))) + sq(yPlayer - (yGaurd - (gaurdRange * 0.35)))) <= sq(gaurdRange)){
      playerCaught = true;
+     Player.reposition();
+     Player.lives--;
+     playerCaught = false;
       } else {
      playerCaught = false;
 } 
