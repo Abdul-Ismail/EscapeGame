@@ -3,6 +3,7 @@
   
 movePlayer playerMove;
 background_bg Background;
+Level level;
 int x,y;
 static boolean right, left, up, down;
 static float xPlayer;
@@ -10,20 +11,16 @@ static float yPlayer = 500;
 static float rotate;
 static PImage bg;
 static int xBG;
-static int yBG = 423;
+static int yBG = 424;
 
   void setup(){
       size(600, 600);
       Player.character = loadImage("player.png");
       playerMove = new movePlayer();
       Background = new background_bg();
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
+      level = new Level();
+      gaurds.add(new Gaurd());
+
   }
 
   void draw(){
@@ -32,7 +29,10 @@ static int yBG = 423;
       playerMove.movePlayer();
       drawBulletinDraw();
       Background.updateBG();
-      // println(Player.lives, mouseX, mouseY);
+      Background.statBar();
+      level.enteredDoor();
+      level.createLevel();
+
   
   
          for(int i = 0; i <gaurds.size(); i++){

@@ -19,10 +19,17 @@ class background_bg{
     yBG= yBG+3;
      bg = fullBG.get(xBG , yBG, 600, 600);
      println(x);
-    }if (up && yBG > 0 && yPlayer < 60){
+    }if (up && yBG > -50 && yPlayer < 60){
       yBG = yBG - 3;
      bg = fullBG.get(xBG , yBG, 600, 600);
      println(x);
     }
+  }
+  
+    void statBar(){
+    //rect(0,0, 600, 50);
+    fill(0, 102, 153);
+    text("lives",10,25);
+    text(Player.lives,40,25);
   }
 }

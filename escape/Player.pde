@@ -15,11 +15,12 @@ static class Player{
   
   static void reposition(){
     xPlayer = 0;
-    yPlayer = 424;
+    yPlayer = 500;
     xBG = 0;
     yBG = 424;
-
   }
+  
+
   
   
  

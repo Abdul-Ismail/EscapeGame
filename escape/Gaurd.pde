@@ -1,6 +1,8 @@
 class Gaurd{
     float xGaurd;
     float yGaurd; 
+    float fixedXGaurd;
+    float fixedYGaurd;
     float change;
     float speed;
     float gaurdWalkDistance;
@@ -18,8 +20,8 @@ float newXGaurd;
 float newYGaurd;
  
   Gaurd(){
-    xGaurd = random(0, 1024);
-    yGaurd = random(0, 1024);
+    fixedXGaurd = random(200, 1024);
+    fixedYGaurd = random(200, 1024);
     speed =  random(1,10);
     gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
@@ -31,10 +33,10 @@ float newYGaurd;
 
      
       fill(0);
-      newXGaurd = xGaurd - xBG;
-      newYGaurd = yGaurd - yBG;
+     xGaurd = fixedXGaurd - xBG;
+     yGaurd = fixedYGaurd - yBG;
      pushMatrix();
-     translate(newXGaurd, newYGaurd);
+     translate(xGaurd, yGaurd);
       rotate(r);
      ellipse(0, 0, 30, 30);
      arc(0, 0, gaurdRange, gaurdRange, 0, HALF_PI);
@@ -64,13 +66,13 @@ float newYGaurd;
       
           if (change < gaurdWalkDistance){
               if (r > -0.8  && r < -0.7){
-                 xGaurd += speed;
+                 fixedXGaurd += speed;
                  change += speed;
               }else r+=0.1;
           
         }else if (change < gaurdWalkDistance*2 ){
                if( r > 2.3 && r < 2.6){
-               xGaurd -= speed;
+               fixedXGaurd -= speed;
                change += speed;
                }else r += 0.1;
           }else change = 0;
@@ -78,13 +80,13 @@ float newYGaurd;
     }else{
               if (change < gaurdWalkDistance){
               if (r > -2.4  && r < -2.2){
-                 yGaurd -= speed;
+                 fixedYGaurd -= speed;
                  change += speed;
               }else r+=0.1;
           
         }else if (change < gaurdWalkDistance*2 ){
                if( r < 0.8 && r > 0.7){
-               yGaurd += speed;
+               fixedYGaurd += speed;
                change += speed;
                }else r += 0.1;
           }else change = 0;
@@ -125,15 +127,15 @@ mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  r;
      }
 
     if ((playerCaught == true)&&(mouseRadians  >0)&&(mouseRadians < angle)){
-       ellipse(50,50,100,100); 
+       ellipse(50,50,100,100);
+       //Player.reposition();
+       Player.lives--;
+       playerCaught = false;
 
       }else fill(255);
 
     if ((sq(xPlayer - (xGaurd - (gaurdRange * 0.35))) + sq(yPlayer - (yGaurd - (gaurdRange * 0.35)))) <= sq(gaurdRange)){
      playerCaught = true;
-     //Player.reposition();
-     Player.lives--;
-     playerCaught = false;
       } else {
      playerCaught = false;
 } 
