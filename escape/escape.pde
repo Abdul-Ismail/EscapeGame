@@ -12,6 +12,7 @@ static float rotate;
 static PImage bg;
 static int xBG;
 static int yBG = 424;
+static boolean reset = false;
 
   void setup(){
       size(600, 600);
@@ -25,6 +26,9 @@ static int yBG = 424;
 
   void draw(){
       background(bg);
+      
+      Player.reposition();
+
       playerMove.drawPlayer();
       playerMove.movePlayer();
       drawBulletinDraw();
