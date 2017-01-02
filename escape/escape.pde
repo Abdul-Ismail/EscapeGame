@@ -2,28 +2,29 @@
   ArrayList<Gaurd> gaurds = new ArrayList<Gaurd>();
   
 movePlayer playerMove;
+background_bg Background;
 int x,y;
 static boolean right, left, up, down;
 static float xPlayer;
 static float yPlayer;
 static   float rotate;
+static PImage bg;
 
   void setup(){
       size(600, 600);
       Player.character = loadImage("player.png");
       playerMove = new movePlayer();
+      Background = new background_bg();
        gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());
-       gaurds.add(new Gaurd());  
   }
 
   void draw(){
-      background(255);
+      background(bg);
       playerMove.drawPlayer();
       playerMove.movePlayer();
       drawBulletinDraw();
-      println(Player.lives, mouseX, mouseY);
+      Background.updateBG();
+      // println(Player.lives, mouseX, mouseY);
   
   
          for(int i = 0; i <gaurds.size(); i++){

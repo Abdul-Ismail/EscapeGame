@@ -16,6 +16,7 @@ static class Player{
   static void reposition(){
     xPlayer = 500;
     yPlayer = 500;
+
   }
   
   
