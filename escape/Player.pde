@@ -3,7 +3,7 @@ static class Player{
   static PImage character;
   //static float r = 0;
   static int imgSize = 100;
-  static float playerSpeed = 10;
+  static float playerSpeed = 4;
   static int lives = 13;
   static int bullets = 15;
   static int level = 1;

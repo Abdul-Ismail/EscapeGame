@@ -28,13 +28,13 @@ static boolean reset = false;
       background(bg);
       
       Player.reposition();
-
+level.enteredDoor();
       playerMove.drawPlayer();
       playerMove.movePlayer();
       drawBulletinDraw();
       Background.updateBG();
       Background.statBar();
-      level.enteredDoor();
+      
       level.createLevel();
 
   

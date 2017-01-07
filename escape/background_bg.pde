@@ -9,13 +9,13 @@ class background_bg{
   void updateBG(){
 
     if (right && xBG < 424 ){
-    xBG= xBG+3;
+    xBG= xBG+int(Player.playerSpeed);
     }if (left && xBG > 0 ){
-      xBG = xBG-3;
+      xBG = xBG-int(Player.playerSpeed);
     }if (down && yBG < 424){
-    yBG= yBG+3;
+    yBG= yBG+int(Player.playerSpeed);
     }if (up && yBG > 0 ){
-      yBG = yBG - 3;
+      yBG = yBG - int(Player.playerSpeed);
     }
     
          bg = fullBG.get(xBG , yBG, 600, 600);

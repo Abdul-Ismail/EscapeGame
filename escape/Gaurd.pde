@@ -4,12 +4,13 @@ class Gaurd{
     float fixedXGaurd;
     float fixedYGaurd;
     float change;
-    float speed;
+    float speed = 1;
     float gaurdWalkDistance;
     float gaurdRange;
     float r;
     int direction;
     boolean playerCaught;
+    boolean gaurdUp, gaurdDown, gaurdLeft, gaurdRight;
     
 float mouseRadians ;
 float newAngle;
@@ -18,14 +19,15 @@ float newArc;
 float angle = HALF_PI;
 float newXGaurd;
 float newYGaurd;
+ PImage characterr;
  
   Gaurd(){
     fixedXGaurd = random(200, 1024);
     fixedYGaurd = random(200, 1024);
-    speed =  random(1,10);
     gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
     direction = 1;//int(random(0,1));
+    characterr = loadImage("player.png");
   }
   
   void drawGaurd(){
@@ -38,17 +40,17 @@ float newYGaurd;
      pushMatrix();
      translate(xGaurd, yGaurd);
       rotate(r);
-     ellipse(0, 0, 30, 30);
-     arc(0, 0, gaurdRange, gaurdRange, 0, HALF_PI);
+     //rect(0, 0, 30, 30);
+     translate(-Player.imgSize/2, -Player.imgSize/2);
+     image(characterr, 0, 0, Player.imgSize, Player.imgSize);
      noFill();
      popMatrix();
      updateGaurd();
      
-     if ( r > 3.1){
-      r = -3.2; 
+     if ( r > 6.3){
+      r = 0; 
      }
      
-     gaurdCaughtPlayer();
          
       //3.9 up     -2.3
       //5.4 right  -0.8
@@ -61,37 +63,58 @@ float newYGaurd;
 
 
   void updateGaurd(){
-     
-    if (direction == 0){
-      
-          if (change < gaurdWalkDistance){
-              if (r > -0.8  && r < -0.7){
-                 fixedXGaurd += speed;
-                 change += speed;
-              }else r+=0.1;
-          
-        }else if (change < gaurdWalkDistance*2 ){
-               if( r > 2.3 && r < 2.6){
-               fixedXGaurd -= speed;
-               change += speed;
-               }else r += 0.1;
-          }else change = 0;
-          
-    }else{
-              if (change < gaurdWalkDistance){
-              if (r > -2.4  && r < -2.2){
-                 fixedYGaurd -= speed;
-                 change += speed;
-              }else r+=0.1;
-          
-        }else if (change < gaurdWalkDistance*2 ){
-               if( r < 0.8 && r > 0.7){
-               fixedYGaurd += speed;
-               change += speed;
-               }else r += 0.1;
-          }else change = 0;
-
-  }
+    
+     int yDifference = int(yGaurd - yPlayer); //the difference is used in order to stop the small movement from up and down when it is between both
+     int xDifference = int(xGaurd - xPlayer);
+       if (xGaurd > xPlayer  && (xDifference >  3  || xDifference <  0 )){
+              fixedXGaurd -=speed; 
+              gaurdLeft = true;
+         }else gaurdLeft = false;
+         
+         if (xGaurd < xPlayer  && (xDifference >  3  || xDifference <  0 )){
+              fixedXGaurd +=speed; 
+              gaurdRight = true;
+         }else gaurdRight = false;
+         if (yGaurd < yPlayer &&  (yDifference >  3 || yDifference < 0 )){
+              fixedYGaurd +=speed;;
+              gaurdDown = true;
+         }else gaurdDown = false;
+         if (yGaurd > yPlayer && ( yDifference >  3 || yDifference < 0 )){
+              fixedYGaurd -=speed;;
+              gaurdUp = true;
+         }else gaurdUp = false;
+         
+         println(yGaurd, yPlayer, yDifference);
+               //0 up
+      //1.2 right up
+      //1.6 right
+      //2.2 down right
+      //3.2 down
+      //4.2 down left
+      //4.7 left
+      //5.2 left up 
+         
+        // if (gaurdLeft && (r < 4.6 || r > 4.7) && !gaurdRight && !gaurdUp) r+=0.2; 
+         //if (gaurdRight && (r < 1.5 || r > 1.7) && !gaurdLeft && !gaurdUp) r+=0.2;
+         
+       if (gaurdRight && (r < 1.5 || r > 1.7) && !gaurdUp && !gaurdDown){    r+=0.2;
+         }else if (gaurdLeft && (r < 4.6 || r > 4.7) && !gaurdUp && !gaurdDown){    r+=0.2;
+           }else if (gaurdUp && (r < 0 || r > 0.4) && !gaurdLeft && !gaurdRight){    r+=0.2;
+             }else if (gaurdDown && (r < 3.1 || r > 3.3) && !gaurdLeft && !gaurdRight){    r+=0.2;
+               }else if(gaurdUp && gaurdRight && (r < 1.1 || r > 1.3)){   r+=0.2;
+                  }else if (gaurdDown && gaurdRight && (r < 2.1 || r > 2.3)){   r+=0.2;
+                     }else if (gaurdDown && gaurdLeft && (r < 4.1 || r > 4.3)){   r+=0.2;
+                       }else if (gaurdUp && gaurdLeft && (r < 5.1 || r > 5.3)){   r+=0.2;
+                         }
+         /*if (gaurdUp &&  r > 0.4){
+             r+=0.2;
+         }else if (gaurdDown && r < 3.1 || r > 3.3){
+             r+=0.2;
+         }else if (gaurdRight && (r < 1.5 || r > 1.7) ){ 
+            r+=0.2;
+         }//else if (gaurdLeft && (r < 4.6 || r > 4.7) ) r+=0.2; 
+         */
+         //println(r);
   }
   
    void gaurdHit(float x, float y, int j, int i){
@@ -102,6 +125,8 @@ float newYGaurd;
         }
  }
  
+ 
+ /*
  void gaurdCaughtPlayer(){
      
 mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  r; 
@@ -142,4 +167,5 @@ mouseRadians = atan2(yPlayer - yGaurd, xPlayer - xGaurd) -  r;
 
 
  }
+ */
 }
