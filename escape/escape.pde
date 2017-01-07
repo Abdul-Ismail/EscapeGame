@@ -21,6 +21,10 @@ static boolean reset = false;
       Background = new background_bg();
       level = new Level();
       gaurds.add(new Gaurd());
+      gaurds.add(new Gaurd());
+      gaurds.add(new Gaurd());
+      gaurds.add(new Gaurd());
+
 
   }
 
@@ -37,11 +41,14 @@ level.enteredDoor();
       
       level.createLevel();
 
-  
+      float[] gaurdCords = new float[2];
   
          for(int i = 0; i <gaurds.size(); i++){
             Gaurd gaurd = gaurds.get(i);
-            gaurd.drawGaurd(); //draw the gaurd
+            gaurdCords=gaurd.gaurdCords();
+ 
+              
+                          gaurd.drawGaurd(); //draw the gaurd
          }
   }
 

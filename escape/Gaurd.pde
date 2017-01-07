@@ -8,9 +8,17 @@ class Gaurd{
     float gaurdWalkDistance;
     float gaurdRange;
     float r;
-    int direction;
     boolean playerCaught;
     boolean gaurdUp, gaurdDown, gaurdLeft, gaurdRight;
+    boolean touchingLeft, touchingRight, touchingBottom, touchingTop;
+    int size = 100;
+    boolean touching;
+    float[] gaurdCords2 = new float[2];
+    int direction;
+    int m;
+    
+          float newfixedYGaurd;
+      float newfixedXGaurd;
     
 float mouseRadians ;
 float newAngle;
@@ -26,7 +34,6 @@ float newYGaurd;
     fixedYGaurd = random(200, 1024);
     gaurdWalkDistance = random(50,400);
     gaurdRange = random(50,300);
-    direction = 1;//int(random(0,1));
     characterr = loadImage("player.png");
   }
   
@@ -40,12 +47,16 @@ float newYGaurd;
      pushMatrix();
      translate(xGaurd, yGaurd);
       rotate(r);
-     //rect(0, 0, 30, 30);
-     translate(-Player.imgSize/2, -Player.imgSize/2);
-     image(characterr, 0, 0, Player.imgSize, Player.imgSize);
+    
+     //translate(-Player.imgSize/2, -Player.imgSize/2);
+          translate(-100/2, -100/2);
+      rect(0, 0, 100, 100);
+     //image(characterr, 0, 0, Player.imgSize, Player.imgSize);
      noFill();
      popMatrix();
+    m = millis();
      updateGaurd();
+     
      
      if ( r > 6.3){
       r = 0; 
@@ -63,40 +74,31 @@ float newYGaurd;
 
 
   void updateGaurd(){
-    
+   
+                  
+              gaurdTouching(100,100);
      int yDifference = int(yGaurd - yPlayer); //the difference is used in order to stop the small movement from up and down when it is between both
      int xDifference = int(xGaurd - xPlayer);
-       if (xGaurd > xPlayer  && (xDifference >  3  || xDifference <  0 )){
-              fixedXGaurd -=speed; 
+     //if (!touching){
+       if (xGaurd > xPlayer  && (xDifference >  3  || xDifference <  0 ) && !touchingRight){
+              fixedXGaurd -= speed; 
               gaurdLeft = true;
          }else gaurdLeft = false;
          
-         if (xGaurd < xPlayer  && (xDifference >  3  || xDifference <  0 )){
-              fixedXGaurd +=speed; 
+         if (xGaurd < xPlayer  && (xDifference >  3  || xDifference <  0 ) && !touchingLeft){
+              fixedXGaurd += speed; 
               gaurdRight = true;
          }else gaurdRight = false;
-         if (yGaurd < yPlayer &&  (yDifference >  3 || yDifference < 0 )){
-              fixedYGaurd +=speed;;
+         if (yGaurd < yPlayer &&  (yDifference >  3 || yDifference < 0 ) && !touchingTop){
+               fixedYGaurd += speed;
               gaurdDown = true;
          }else gaurdDown = false;
-         if (yGaurd > yPlayer && ( yDifference >  3 || yDifference < 0 )){
-              fixedYGaurd -=speed;;
+         if (yGaurd > yPlayer && ( yDifference >  3 || yDifference < 0 ) && !touchingBottom ){
+              fixedYGaurd -= speed;;
               gaurdUp = true;
          }else gaurdUp = false;
-         
-         println(yGaurd, yPlayer, yDifference);
-               //0 up
-      //1.2 right up
-      //1.6 right
-      //2.2 down right
-      //3.2 down
-      //4.2 down left
-      //4.7 left
-      //5.2 left up 
-         
-        // if (gaurdLeft && (r < 4.6 || r > 4.7) && !gaurdRight && !gaurdUp) r+=0.2; 
-         //if (gaurdRight && (r < 1.5 || r > 1.7) && !gaurdLeft && !gaurdUp) r+=0.2;
-         
+    // }
+
        if (gaurdRight && (r < 1.5 || r > 1.7) && !gaurdUp && !gaurdDown){    r+=0.2;
          }else if (gaurdLeft && (r < 4.6 || r > 4.7) && !gaurdUp && !gaurdDown){    r+=0.2;
            }else if (gaurdUp && (r < 0 || r > 0.4) && !gaurdLeft && !gaurdRight){    r+=0.2;
@@ -106,15 +108,8 @@ float newYGaurd;
                      }else if (gaurdDown && gaurdLeft && (r < 4.1 || r > 4.3)){   r+=0.2;
                        }else if (gaurdUp && gaurdLeft && (r < 5.1 || r > 5.3)){   r+=0.2;
                          }
-         /*if (gaurdUp &&  r > 0.4){
-             r+=0.2;
-         }else if (gaurdDown && r < 3.1 || r > 3.3){
-             r+=0.2;
-         }else if (gaurdRight && (r < 1.5 || r > 1.7) ){ 
-            r+=0.2;
-         }//else if (gaurdLeft && (r < 4.6 || r > 4.7) ) r+=0.2; 
-         */
-         //println(r);
+
+    
   }
   
    void gaurdHit(float x, float y, int j, int i){
@@ -124,6 +119,64 @@ float newYGaurd;
           bullets.remove(i);
         }
  }
+ 
+ void gaurdTouching(int width, int height)  {
+   
+   for(int j = 0; j <gaurds.size();j++){
+                 Gaurd gaurd2 = gaurds.get(j);
+                gaurdCords2 = gaurd2.gaurdCords();
+                    float xGaurd2 = gaurdCords2[0];
+                    float yGaurd2 = gaurdCords2[1];
+
+println("SSS");
+if (xGaurd != xGaurd2 && yGaurd != yGaurd2){
+  if (xGaurd >= xGaurd2 && xGaurd <= xGaurd2+width && 
+      yGaurd >= yGaurd2 && yGaurd <= yGaurd2+height ||
+      xGaurd + size >= xGaurd2 && xGaurd + size <= xGaurd2+width && 
+      yGaurd + size >= yGaurd2 && yGaurd + size <= yGaurd2+height ||  
+      xGaurd + size >= xGaurd2 && xGaurd + size <= xGaurd2+width && 
+      yGaurd >= yGaurd2 && yGaurd  <= yGaurd2+height ||  
+      xGaurd >= xGaurd2 && xGaurd <= xGaurd2+width && 
+      yGaurd + size >= yGaurd2 && yGaurd + size <= yGaurd2+height) {
+     touching = true;
+     
+      if (xGaurd > xGaurd2){
+               //touchingRight = true;
+               //touchingLeft = false;
+               fixedXGaurd+=5;
+      }if (xGaurd < xGaurd2){
+               //touchingLeft = true;
+               //touchingRight = false;
+      }       fixedXGaurd-=5;
+      if (yGaurd < yGaurd2){
+               ///touchingTop = true;
+               //touchingBottom = false;
+                fixedYGaurd-=5;
+      }if (yGaurd > yGaurd2){
+               //touchingBottom = true;
+               //touchingTop = false;
+               fixedYGaurd+=5;
+      }
+ 
+  } else {
+
+
+  }
+  
+   }
+   }
+   
+  
+}
+
+   float[] gaurdCords(){
+     float[] gaurdCords = new float[2];
+      gaurdCords[0] = xGaurd;
+      gaurdCords[1] = yGaurd;
+    return gaurdCords;
+   }
+
+ 
  
  
  /*
