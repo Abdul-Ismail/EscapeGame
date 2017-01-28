@@ -2,6 +2,8 @@ class Player{
   
   boolean notMoving = true;
   boolean wallTouched;
+  boolean UP, DOWN, LEFT, RIGHT;
+  boolean a;
   
 
 
@@ -11,7 +13,14 @@ class Player{
  }
  
  void updatePlayer(){
-   if (key == 'd'){
+   
+   if (key == 'd' && !LEFT && !UP && !DOWN) RIGHT = true;
+   if (key == 'a' && !RIGHT && !UP && !DOWN) LEFT = true;
+   if (key == 'w' && !DOWN && !LEFT && !RIGHT) UP = true;
+   if (key == 's' && !UP && !LEFT && !RIGHT) DOWN = true;
+   
+   
+   if (RIGHT){
      if (xPlayer < width- 19 && !wallTouched){
        playerMoving = true;
        xPlayer +=10;
@@ -24,12 +33,13 @@ class Player{
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-           key = 't';
+            RIGHT = false;
+            key = 'f';
         }
         
  }
    
-           if (key == 's'){
+           if (DOWN){
           println("SS");
      if (yPlayer < height - 5 && !wallTouched){
        playerMoving = true;
@@ -43,12 +53,13 @@ class Player{
         }else if (wallTouched){
             playerMoving = false;
              wallTouched = false;
-           key = 't';
+             DOWN = false;
+             key = 'f';
         }
      
    }
    
-   if (key == 'a'){
+   if (LEFT){
      if (xPlayer > 19 && !wallTouched){
        playerMoving = true;
        xPlayer -=10;
@@ -61,12 +72,13 @@ class Player{
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-           key = 't';
+            LEFT = false;
+            key = 'f';
         }
         
  }
  
-    if (key == 'w'){
+    if (UP){
      if (yPlayer > 19 && !wallTouched){
        playerMoving = true;
        yPlayer -=10;
@@ -79,7 +91,8 @@ class Player{
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-           key = 't';
+            UP = false;
+            key = 'f';
         }
         
  }
