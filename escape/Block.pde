@@ -5,6 +5,8 @@ class Block{
    boolean touching;
    int blockSize = 70;
    int playerSize = 25;
+   float tempX = 0;
+   float tempY = 0;
    
    Block(float passedX, float passedY){
      x = passedX;
@@ -19,7 +21,12 @@ class Block{
    if (alive){
        rect(x,y,blockSize,blockSize);
    }else if (!alive && !playerMoving && !touching){
-     alive = true;
+      tempY = y;
+      if (tempX < x){
+        rect(tempX, tempY, blockSize, blockSize);
+        tempX += 10;
+       }else alive = true;
+      
    }
   
 

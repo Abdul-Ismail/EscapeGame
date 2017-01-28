@@ -13,9 +13,10 @@ class Player{
  void updatePlayer(){
    if (key == 'd'){
      if (xPlayer < width- 20 && !wallTouched){
+       playerMoving = true;
        xPlayer +=10;
        wallTouched = false;
-       playerMoving = true;
+       
      }else wallTouched = true;
      
         if ( wallTouched && xPlayer > width - 20 - (2*70)){
