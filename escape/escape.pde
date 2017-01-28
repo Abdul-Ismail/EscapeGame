@@ -1,6 +1,9 @@
 ArrayList<Block> blocks = new ArrayList<Block>();
 Player player;
 
+static float xPlayer = 45;
+static float yPlayer = 45;
+
 void setup(){
   size(600,600);
   player = new Player();
@@ -13,7 +16,7 @@ void setup(){
 }
 
 void draw(){
-  
+   background(0);
    for(int i = 0; i < blocks.size(); i++)
     {
       Block block = blocks.get(i);

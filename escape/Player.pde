@@ -4,7 +4,7 @@ class Player{
 
 
  void drawPlayer(){
-   ellipse(10, 10, 50, 50);
+   ellipse(xPlayer, yPlayer, 50, 50);
  }
  
 }
