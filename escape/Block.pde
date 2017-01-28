@@ -1,19 +1,21 @@
 class Block{
-  
      
    float x,y;
-   boolean alive;
+   boolean alive = true;
    
    Block(float passedX, float passedY){
      x = passedX;
      y = passedY;
+    
    }
   
 
 
  void drawBlock(){
-    
-   rect(x,y,50,50);
+   if (alive){
+       rect(x,y,70,70);
+   }
+  
  }
  
 }
