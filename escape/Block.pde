@@ -2,6 +2,7 @@ class Block{
      
    float x,y;
    boolean alive = true;
+   boolean touching;
    int blockSize = 70;
    int playerSize = 25;
    
@@ -14,9 +15,11 @@ class Block{
 
 
  void drawBlock(){
+   playerInBlock();
    if (alive){
        rect(x,y,blockSize,blockSize);
-       playerInBlock();
+   }else if (!alive && !playerMoving && !touching){
+     alive = true;
    }
   
 
@@ -32,10 +35,10 @@ void playerInBlock(){
       xPlayer >= x && xPlayer <= x+blockSize && 
       yPlayer + playerSize >= y && yPlayer + playerSize <= y+blockSize) {
      alive = false;
-     println("SSSS");
+     touching = true;
+
+}else touching = false;
+
 }
 
-
-
-}
 }
