@@ -18,6 +18,7 @@ boolean doneRotatingTriangle = true;
    Block(float passedX, float passedY){
      x = passedX;
      y = passedY;
+     triangleRotation2 = int(random(1,5));
     
    }
   
@@ -28,20 +29,26 @@ boolean doneRotatingTriangle = true;
    if (alive){
       if (type == 1) rect(x,y,blockSize,blockSize);
       if (type == 2) arrow();
-   }else if (!alive && !playerMoving && !touching){
+   }else if (!alive && !touching && left == false && right == false && up == false && down == false){
       tempY = y;
         if (!doOnce) {
             type = int(random(1,3));
             doOnce = true;
-               println(type);
+
         }
         
       if (tempX < x){
         if (type == 1) rect(tempX, tempY, blockSize, blockSize);
         if (type == 2) arrow();
         tempX += 10;
-       }else alive = true;   
+        regenerating = true;
+       }else{ 
+         alive = true;  
+         regenerating = false;
+         key = 'l';
+       }
    }
+   
   
 
 }
@@ -52,6 +59,19 @@ void playerInBlock(){
      alive = false;
      doOnce = false;
      touching = true;
+       if (type == 2 && triangleRotation2 == 1){
+          right = true; down = false; up = false; left = false;
+          type = 0;    
+       }else if (type == 2 && triangleRotation2 == 2){
+          down = true; right = false; up = false; left = false;
+          type = 0;    
+       } else if (type == 2 && triangleRotation2 == 3){
+          left = true; right = false; up = false; down = false;
+          type = 0;    
+       }else if (type == 2 && triangleRotation2 == 4){
+          up = true; right = false; down = false; left = false;
+          type = 0;    
+       }
 
 }else touching = false;
 

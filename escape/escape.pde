@@ -4,6 +4,8 @@ Player player;
 static float xPlayer = 75;
 static float yPlayer = 115;
 static boolean playerMoving = false;
+static boolean up, down, left, right;
+static boolean regenerating;
 
 void setup(){
   size(600,600);
@@ -17,6 +19,7 @@ void setup(){
 }
 
 void draw(){
+
    background(0);
    for(int i = 0; i < blocks.size(); i++)
     {
@@ -32,9 +35,11 @@ void keyPressed(){
 }
 
 void mouseClicked(){
+
  for(int i = 0; i < blocks.size(); i++)
     {
       Block block = blocks.get(i);
       block.updateArrow();;
     } 
+  
 }

@@ -9,40 +9,40 @@ class Player{
 
  void drawPlayer(){
    ellipse(xPlayer, yPlayer, 50, 50);
-   updatePlayer();
+   if (!regenerating) updatePlayer();
  }
  
  void updatePlayer(){
    
    
-   if (key == 'a' && !RIGHT && !UP && !DOWN) LEFT = true;
-   if (key == 'w' && !DOWN && !LEFT && !RIGHT) UP = true;
-   if (key == 's' && !UP && !LEFT && !RIGHT) DOWN = true;
-   if (key == 'd' && !LEFT && !UP && !DOWN) RIGHT = true; 
+   if (key == 'a' && !right && !up && !down) left = true;
+   if (key == 'w' && !down && !left && !right) up = true;
+   if (key == 's' && !up && !left && !right) down = true;
+   if (key == 'd' && !left && !up && !down) right = true; 
    
 
    
    
-   if (RIGHT && !LEFT && !UP && !DOWN){
-     if (xPlayer < width- 19 && !wallTouched){
+   if (right && !left && !up && !down){
+     if (xPlayer < width- 70 && !wallTouched){
        playerMoving = true;
        xPlayer +=10;
        wallTouched = false;
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer > width - 19 - (2*70)){
+        if ( wallTouched && xPlayer > width - 85 - (int(random(2,6)*70))){
           xPlayer -= 13;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-            RIGHT = false;
+            right = false;
             key = 'f';
         }
         
  }
    
-       if (DOWN){
+       if (down){
          if (yPlayer < height - 5 && !wallTouched){
            playerMoving = true;
            yPlayer +=10;
@@ -50,18 +50,19 @@ class Player{
        
        }else wallTouched = true;
      
-          if ( wallTouched && yPlayer > height - 5 - (2*70)){
+          if ( wallTouched && yPlayer > height - 5 - (int(random(2,6)*70))){
               yPlayer -= 13;
           }else if (wallTouched){
                playerMoving = false;
                wallTouched = false;
-               DOWN = false;
+               down = false;
                key = 'f';
         }
      
    }
    
-   if (LEFT){
+   if (left){
+     println("DDD");
      if (xPlayer > 19 && !wallTouched){
        playerMoving = true;
        xPlayer -=10;
@@ -69,18 +70,18 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer < 19 + (2*70)){
+        if ( wallTouched && xPlayer < 19 + (int(random(2,6))*70)){
           xPlayer += 13;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-            LEFT = false;
+            left = false;
             key = 'f';
         }
         
  }
  
-    if (UP){
+    if (up){
      if (yPlayer > 19 && !wallTouched){
        playerMoving = true;
        yPlayer -=10;
@@ -88,12 +89,12 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && yPlayer < 19 + (2*70)){
+        if ( wallTouched && yPlayer < 19 + (int(random(2,6)*70))){
           yPlayer += 13;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
-            UP = false;
+            up = false;
             key = 'f';
         }
         
