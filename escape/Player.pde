@@ -14,13 +14,16 @@ class Player{
  
  void updatePlayer(){
    
-   if (key == 'd' && !LEFT && !UP && !DOWN) RIGHT = true;
+   
    if (key == 'a' && !RIGHT && !UP && !DOWN) LEFT = true;
    if (key == 'w' && !DOWN && !LEFT && !RIGHT) UP = true;
    if (key == 's' && !UP && !LEFT && !RIGHT) DOWN = true;
+   if (key == 'd' && !LEFT && !UP && !DOWN) RIGHT = true; 
+   
+
    
    
-   if (RIGHT){
+   if (RIGHT && !LEFT && !UP && !DOWN){
      if (xPlayer < width- 19 && !wallTouched){
        playerMoving = true;
        xPlayer +=10;
@@ -39,22 +42,21 @@ class Player{
         
  }
    
-           if (DOWN){
-          println("SS");
-     if (yPlayer < height - 5 && !wallTouched){
-       playerMoving = true;
-       yPlayer +=10;
-       wallTouched = false;
+       if (DOWN){
+         if (yPlayer < height - 5 && !wallTouched){
+           playerMoving = true;
+           yPlayer +=10;
+           wallTouched = false;
        
-     }else wallTouched = true;
+       }else wallTouched = true;
      
-        if ( wallTouched && yPlayer > height - 5 - (2*70)){
-          yPlayer -= 13;
-        }else if (wallTouched){
-            playerMoving = false;
-             wallTouched = false;
-             DOWN = false;
-             key = 'f';
+          if ( wallTouched && yPlayer > height - 5 - (2*70)){
+              yPlayer -= 13;
+          }else if (wallTouched){
+               playerMoving = false;
+               wallTouched = false;
+               DOWN = false;
+               key = 'f';
         }
      
    }

@@ -28,5 +28,5 @@ void draw(){
 }
 
 void keyPressed(){
-  if (key == 'd')  xPlayer += 70;
+
 }
