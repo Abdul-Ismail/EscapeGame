@@ -88,7 +88,8 @@ void arrow(){
 }
   
   void updateArrow(){
-    if (doneRotatingTriangle){
+     boolean inBlock = withinBlock(mouseX, mouseY);
+    if (doneRotatingTriangle && inBlock){
       triangleRotation2 = triangleRotation2 % 4 + 1;
       triangleRotation = triangleRotation2 * 90 - 90;
     }
