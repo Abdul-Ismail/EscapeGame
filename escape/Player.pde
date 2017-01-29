@@ -5,9 +5,22 @@ class Player{
   boolean UP, DOWN, LEFT, RIGHT;
   boolean a;
   
-
+ Player(){
+   for (int i = 0; i <7; i++){
+     xPositions[i] = 80 + ( i * 70); 
+   }
+   
+   for (int i = 0; i <7; i++){
+     yPositions[i] = 115 + ( i * 70); 
+   }
+ }
 
  void drawPlayer(){
+   println(mouseY);
+      for (int i = 0; i <7; i++){
+     //ellipse(xPositions[i], 50, 50,50);
+   }
+   
    ellipse(xPlayer, yPlayer, 50, 50);
    if (!regenerating) updatePlayer();
  }
@@ -20,9 +33,10 @@ class Player{
    if (key == 's' && !up && !left && !right) down = true;
    if (key == 'd' && !left && !up && !down) right = true; 
    
-
+   int xLocation = (xPositions[(int(random(2,6)))]);
+   int yLocation = (yPositions[(int(random(2,6)))]);
    
-   
+ 
    if (right && !left && !up && !down){
      if (xPlayer < width- 70 && !wallTouched){
        playerMoving = true;
@@ -31,8 +45,9 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer > width - 85 - (int(random(2,6)*70))){
-          xPlayer -= 13;
+        if ( wallTouched && xPlayer > xLocation){
+          xPlayer -= 10;
+          println(xPlayer);
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
@@ -50,8 +65,8 @@ class Player{
        
        }else wallTouched = true;
      
-          if ( wallTouched && yPlayer > height - 5 - (int(random(2,6)*70))){
-              yPlayer -= 13;
+          if ( wallTouched && yPlayer > yLocation){
+              yPlayer -= 10;
           }else if (wallTouched){
                playerMoving = false;
                wallTouched = false;
@@ -70,8 +85,8 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer < 19 + (int(random(2,6))*70)){
-          xPlayer += 13;
+        if ( wallTouched && xPlayer <  xLocation){
+          xPlayer += 10;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
@@ -89,8 +104,8 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && yPlayer < 19 + (int(random(2,6)*70))){
-          yPlayer += 13;
+        if ( wallTouched && yPlayer < yLocation){
+          yPlayer += 10;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;

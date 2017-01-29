@@ -6,6 +6,8 @@ static float yPlayer = 115;
 static boolean playerMoving = false;
 static boolean up, down, left, right;
 static boolean regenerating;
+static int[] xPositions = new int[7];
+static int[] yPositions = new int[7];
 
 void setup(){
   size(600,600);

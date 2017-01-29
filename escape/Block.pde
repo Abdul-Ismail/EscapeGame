@@ -13,20 +13,30 @@ class Block{
 boolean clicked;
 int triangleRotation2;
 boolean doneRotatingTriangle = true;
+ float rectXcenter;
+ float rectYcenter;
+     
+     boolean inPositionX;
+     boolean inPositionY;
+     
    
    
    Block(float passedX, float passedY){
      x = passedX;
      y = passedY;
      triangleRotation2 = int(random(1,5));
+     rectXcenter = x + blockSize/2;
+     rectYcenter = y + blockSize/2;
     
    }
   
 
 
  void drawBlock(){
+   fill(255,43,56);
    playerInBlock();
    if (alive){
+        
       if (type == 1) rect(x,y,blockSize,blockSize);
       if (type == 2) arrow();
    }else if (!alive && !touching && left == false && right == false && up == false && down == false){
@@ -59,21 +69,30 @@ void playerInBlock(){
      alive = false;
      doOnce = false;
      touching = true;
-       if (type == 2 && triangleRotation2 == 1){
-          right = true; down = false; up = false; left = false;
-          type = 0;    
-       }else if (type == 2 && triangleRotation2 == 2){
-          down = true; right = false; up = false; left = false;
-          type = 0;    
-       } else if (type == 2 && triangleRotation2 == 3){
-          left = true; right = false; up = false; down = false;
-          type = 0;    
-       }else if (type == 2 && triangleRotation2 == 4){
-          up = true; right = false; down = false; left = false;
-          type = 0;    
-       }
 
+
+     
+     
+       if (type == 2 && triangleRotation2 == 1 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1)){
+          right = true; down = false; up = false; left = false;
+          type = 0;   
+          inPositionY = false;
+       }else if (type == 2 && triangleRotation2 == 2 && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
+          down = true; right = false; up = false; left = false;
+          type = 0;  
+          inPositionX = false;
+       } else if (type == 2 && triangleRotation2 == 3 && (xPlayer < rectXcenter + 1 && xPlayer > rectXcenter - 1)){
+          left = true; right = false; up = false; down = false;
+          type = 0;  
+          inPositionY = false;
+       }else if (type == 2 && triangleRotation2 == 4 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1)){
+          up = true; right = false; down = false; left = false;
+          type = 0; 
+          inPositionX = false;
+       }
+     
 }else touching = false;
+  
 
 }
 
