@@ -30,3 +30,11 @@ void draw(){
 void keyPressed(){
 
 }
+
+void mouseClicked(){
+ for(int i = 0; i < blocks.size(); i++)
+    {
+      Block block = blocks.get(i);
+      block.updateArrow();;
+    } 
+}

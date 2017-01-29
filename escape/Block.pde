@@ -9,6 +9,10 @@ class Block{
    float tempY = 0;
    boolean doOnce;
    int type = 1;
+   float triangleRotation;
+boolean clicked;
+int triangleRotation2;
+boolean doneRotatingTriangle = true;
    
    
    Block(float passedX, float passedY){
@@ -23,7 +27,7 @@ class Block{
    playerInBlock();
    if (alive){
       if (type == 1) rect(x,y,blockSize,blockSize);
-      if (type == 2) triangle(x + 30, y+60, x + 30, y- 50+60, x + 30 + 30, y - 25+60);
+      if (type == 2) arrow();
    }else if (!alive && !playerMoving && !touching){
       tempY = y;
         if (!doOnce) {
@@ -34,7 +38,7 @@ class Block{
         
       if (tempX < x){
         if (type == 1) rect(tempX, tempY, blockSize, blockSize);
-        if (type == 2) triangle(tempX, tempY, tempX, tempY- 50, tempX + 30, tempY - 25);
+        if (type == 2) arrow();
         tempX += 10;
        }else alive = true;   
    }
@@ -68,4 +72,28 @@ void playerInBlock(){
   }else return false;
 
 }
+
+void arrow(){
+  
+     pushMatrix();
+     translate(tempX + 35, tempY +30);
+     rotate(radians(triangleRotation));
+     triangle(-30, 30, 0, -30, 30, 30); 
+     popMatrix();   
+ 
+    if (triangleRotation < 90 * triangleRotation2){   
+       triangleRotation += 2;
+       doneRotatingTriangle = false;
+    }else doneRotatingTriangle = true;
+}
+  
+  void updateArrow(){
+    if (doneRotatingTriangle){
+      triangleRotation2 = triangleRotation2 % 4 + 1;
+      triangleRotation = triangleRotation2 * 90 - 90;
+    }
+  }
+  
+
+
 }
