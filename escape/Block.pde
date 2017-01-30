@@ -39,6 +39,7 @@ boolean doneRotatingTriangle = true;
         
       if (type == 1) rect(x,y,blockSize,blockSize);
       if (type == 2) arrow();
+      
    }else if (!alive && !touching && left == false && right == false && up == false && down == false){
       tempY = y;
         if (!doOnce) {
@@ -73,19 +74,19 @@ void playerInBlock(){
 
      
      
-       if (type == 2 && triangleRotation2 == 1 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1)){
+       if (type == 2 && triangleRotation2 == 1 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
           right = true; down = false; up = false; left = false;
           type = 0;   
           inPositionY = false;
-       }else if (type == 2 && triangleRotation2 == 2 && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
+       }else if (type == 2 && triangleRotation2 == 2 && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1) && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) ){
           down = true; right = false; up = false; left = false;
           type = 0;  
           inPositionX = false;
-       } else if (type == 2 && triangleRotation2 == 3 && (xPlayer < rectXcenter + 1 && xPlayer > rectXcenter - 1)){
+       } else if (type == 2 && triangleRotation2 == 3 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
           left = true; right = false; up = false; down = false;
           type = 0;  
           inPositionY = false;
-       }else if (type == 2 && triangleRotation2 == 4 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1)){
+       }else if (type == 2 && triangleRotation2 == 4 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
           up = true; right = false; down = false; left = false;
           type = 0; 
           inPositionX = false;
@@ -132,6 +133,14 @@ void arrow(){
       triangleRotation2 = triangleRotation2 % 4 + 1;
       triangleRotation = triangleRotation2 * 90 - 90;
     }
+  }
+  
+  float [] randomCords(){
+    float[] PostiontionForPlayerToReposition = new float[2];
+    PostiontionForPlayerToReposition[0] =  rectXcenter;
+    PostiontionForPlayerToReposition[1] =  rectYcenter;
+    return PostiontionForPlayerToReposition;
+    
   }
   
 

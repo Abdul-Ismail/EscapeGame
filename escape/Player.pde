@@ -4,23 +4,16 @@ class Player{
   boolean wallTouched;
   boolean UP, DOWN, LEFT, RIGHT;
   boolean a;
+  boolean moveDone;
+  float[] newPositions = new float[2];
+  boolean doOnce;
   
  Player(){
-   for (int i = 0; i <7; i++){
-     xPositions[i] = 80 + ( i * 70); 
-   }
-   
-   for (int i = 0; i <7; i++){
-     yPositions[i] = 115 + ( i * 70); 
-   }
+
  }
 
  void drawPlayer(){
-   println(mouseY);
-      for (int i = 0; i <7; i++){
-     //ellipse(xPositions[i], 50, 50,50);
-   }
-   
+
    ellipse(xPlayer, yPlayer, 50, 50);
    if (!regenerating) updatePlayer();
  }
@@ -33,8 +26,14 @@ class Player{
    if (key == 's' && !up && !left && !right) down = true;
    if (key == 'd' && !left && !up && !down) right = true; 
    
-   int xLocation = (xPositions[(int(random(2,6)))]);
-   int yLocation = (yPositions[(int(random(2,6)))]);
+   //int xLocation = (xPositions[(int(random(2,6)))]);
+
+   if (!doOnce){
+         Block block = blocks.get(int(random(2,6)));
+        newPositions = block.randomCords();
+        doOnce = true;
+   }
+       
    
  
    if (right && !left && !up && !down){
@@ -45,13 +44,18 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer > xLocation){
+        if ( wallTouched && xPlayer > newPositions[0] && !moveDone){
           xPlayer -= 10;
-          println(xPlayer);
+        }else if (wallTouched && (xPlayer < newPositions[0] - 2 && xPlayer < newPositions[0] + 2)) {
+           xPlayer += 1;
+           moveDone = true;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
             right = false;
+            moveDone = false;
+            doOnce = false;
+            println(xPlayer, newPositions[0]);
             key = 'f';
         }
         
@@ -65,9 +69,12 @@ class Player{
        
        }else wallTouched = true;
      
-          if ( wallTouched && yPlayer > yLocation){
+          if ( wallTouched && yPlayer > newPositions[1] && !moveDone){
               yPlayer -= 10;
-          }else if (wallTouched){
+          }else if (wallTouched && (yPlayer < newPositions[1] - 2 && yPlayer > newPositions[1] + 2 )) {
+           yPlayer += 1;
+           moveDone = true;
+        }else if (wallTouched){
                playerMoving = false;
                wallTouched = false;
                down = false;
@@ -77,7 +84,6 @@ class Player{
    }
    
    if (left){
-     println("DDD");
      if (xPlayer > 19 && !wallTouched){
        playerMoving = true;
        xPlayer -=10;
@@ -85,8 +91,11 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && xPlayer <  xLocation){
+        if ( wallTouched && xPlayer <  newPositions[0] && !moveDone){
           xPlayer += 10;
+        }else if (wallTouched && (xPlayer < newPositions[0] - 2 && xPlayer > newPositions[0] + 2 )) {
+           xPlayer += 1;
+           moveDone = true;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
@@ -104,8 +113,11 @@ class Player{
        
      }else wallTouched = true;
      
-        if ( wallTouched && yPlayer < yLocation){
+        if ( wallTouched && yPlayer < newPositions[1] && !moveDone){
           yPlayer += 10;
+        }else if (wallTouched && (yPlayer < newPositions[1] - 2 && yPlayer > newPositions[1] + 2 )) {
+           yPlayer -= 1;
+           moveDone = true;
         }else if (wallTouched){
             playerMoving = false;
             wallTouched = false;
