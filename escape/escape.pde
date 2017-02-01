@@ -40,6 +40,12 @@ void draw(){
         Enemy enemy = enemies.get(i);
         enemy.drawEnemy();
     }
+    
+    println(enemies.size());
+     if (enemies.size() < 1 && !playerMoving){
+             enemies.add(new Enemy());
+             println("SSS");
+     }
 }
 
 void keyPressed(){
