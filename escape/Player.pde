@@ -25,11 +25,6 @@ class Player{
    if (key == 'w' && !down && !left && !right) up = true;
    if (key == 's' && !up && !left && !right) down = true;
    if (key == 'd' && !left && !up && !down) right = true; 
-   
-   //int xLocation = (xPositions[(int(random(2,6)))]);
-   
-    //if (left) println("DDD");
- 
 
    if (!pickCordsOnce && (left || right || up || down )){
          if (left) newBlockPosition = int(random(1,4));
@@ -63,7 +58,6 @@ class Player{
             right = false;
             moveDone = false;
             pickCordsOnce = false;
-            println(xPlayer, newPositions[0]);
             key = 'f';
         }
         
