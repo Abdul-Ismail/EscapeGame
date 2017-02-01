@@ -4,10 +4,10 @@ class Player{
   boolean wallTouched;
   boolean UP, DOWN, LEFT, RIGHT;
   boolean a;
-  boolean moveDone;
   float[] newPositions = new float[2];
-  boolean doOnce;
-  
+  int newBlockPosition;
+  boolean moveDone; //if the ball has touched the end of the wall before bouncing back
+   
  Player(){
 
  }
@@ -27,15 +27,23 @@ class Player{
    if (key == 'd' && !left && !up && !down) right = true; 
    
    //int xLocation = (xPositions[(int(random(2,6)))]);
+   
+    //if (left) println("DDD");
+ 
 
-   if (!doOnce){
-         Block block = blocks.get(int(random(2,6)));
-        newPositions = block.randomCords();
-        doOnce = true;
+   if (!pickCordsOnce && (left || right || up || down )){
+         if (left) newBlockPosition = int(random(1,4));
+         if (right) newBlockPosition = int(random(3,6));
+         if (up) newBlockPosition = int(random(1,4) * 7);
+         if (down) newBlockPosition = int(random(3,6) * 7);
+         
+         
+           Block block = blocks.get(newBlockPosition);
+           newPositions = block.randomCords(false);
+         pickCordsOnce = true;
    }
        
-   
- 
+  
    if (right && !left && !up && !down){
      if (xPlayer < width- 70 && !wallTouched){
        playerMoving = true;
@@ -54,7 +62,7 @@ class Player{
             wallTouched = false;
             right = false;
             moveDone = false;
-            doOnce = false;
+            pickCordsOnce = false;
             println(xPlayer, newPositions[0]);
             key = 'f';
         }

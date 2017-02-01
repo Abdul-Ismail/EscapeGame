@@ -1,4 +1,5 @@
 ArrayList<Block> blocks = new ArrayList<Block>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 Player player;
 
 static float xPlayer = 75;
@@ -8,6 +9,7 @@ static boolean up, down, left, right;
 static boolean regenerating;
 static int[] xPositions = new int[7];
 static int[] yPositions = new int[7];
+static   boolean pickCordsOnce;
 
 void setup(){
   size(600,600);
@@ -17,6 +19,8 @@ void setup(){
         blocks.add(new Block(50+(j*70), 80+(i*70)));
       }
     }
+    
+    enemies.add(new Enemy());
 
 }
 
@@ -30,6 +34,12 @@ void draw(){
     }
     
     player.drawPlayer();
+    
+       for(int i = 0; i < enemies.size(); i++)
+    {
+        Enemy enemy = enemies.get(i);
+        enemy.drawEnemy();
+    }
 }
 
 void keyPressed(){

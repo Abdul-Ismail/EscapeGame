@@ -10,14 +10,12 @@ class Block{
    boolean doOnce;
    int type = 1;
    float triangleRotation;
-boolean clicked;
-int triangleRotation2;
-boolean doneRotatingTriangle = true;
- float rectXcenter;
- float rectYcenter;
-     
-     boolean inPositionX;
-     boolean inPositionY;
+   boolean clicked;
+   int triangleRotation2;
+   boolean doneRotatingTriangle = true;
+   float rectXcenter;
+   float rectYcenter;
+   boolean enemyPresent;
      
    
    
@@ -35,7 +33,7 @@ boolean doneRotatingTriangle = true;
  void drawBlock(){
    fill(255,43,56);
    playerInBlock();
-   if (alive){
+   if (alive && !enemyPresent){
         
       if (type == 1) rect(x,y,blockSize,blockSize);
       if (type == 2) arrow();
@@ -65,31 +63,28 @@ boolean doneRotatingTriangle = true;
 }
 
 void playerInBlock(){
-  boolean inBlock = withinBlock(xPlayer, yPlayer);
+  boolean inBlock = withinBlock(xPlayer, yPlayer); //checks if player is within block
   if (inBlock){
      alive = false;
      doOnce = false;
      touching = true;
 
-
-     
-     
-       if (type == 2 && triangleRotation2 == 1 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
+       if (type == 2 && triangleRotation2 == 1 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1) ){
           right = true; down = false; up = false; left = false;
           type = 0;   
-          inPositionY = false;
+          pickCordsOnce = false;
        }else if (type == 2 && triangleRotation2 == 2 && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1) && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) ){
           down = true; right = false; up = false; left = false;
           type = 0;  
-          inPositionX = false;
-       } else if (type == 2 && triangleRotation2 == 3 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
+          pickCordsOnce = false;
+       } else if (type == 2 && triangleRotation2 == 3 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1) ){
           left = true; right = false; up = false; down = false;
           type = 0;  
-          inPositionY = false;
-       }else if (type == 2 && triangleRotation2 == 4 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
+          pickCordsOnce = false;
+       }else if (type == 2 && triangleRotation2 == 4 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1) ){
           up = true; right = false; down = false; left = false;
           type = 0; 
-          inPositionX = false;
+          pickCordsOnce = false; 
        }
      
 }else touching = false;
@@ -135,7 +130,8 @@ void arrow(){
     }
   }
   
-  float [] randomCords(){
+  float [] randomCords(boolean enemyPresentPassed){
+    enemyPresent = enemyPresentPassed;
     float[] PostiontionForPlayerToReposition = new float[2];
     PostiontionForPlayerToReposition[0] =  rectXcenter;
     PostiontionForPlayerToReposition[1] =  rectYcenter;
