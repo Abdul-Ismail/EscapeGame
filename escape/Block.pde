@@ -43,20 +43,27 @@ class Block{
         if (!doOnce) {
             type = int(random(1,3));
             doOnce = true;
+               tempX = 0;
+            
 
         }
         
+    // if (x < 300){   
       if (tempX < x){
         if (type == 1) rect(tempX, tempY, blockSize, blockSize);
         if (type == 2) arrow();
         tempX += 10;
         regenerating = true;
+           if (triangleRotation < 90 * triangleRotation2){   
+       //triangleRotation += 30;
+           }
        }else{ 
          alive = true;  
          regenerating = false;
          key = 'l';
        }
-   }
+     }
+  // }
    
   
 

@@ -11,6 +11,8 @@ static boolean regenerating;
 static int[] xPositions = new int[7];
 static int[] yPositions = new int[7];
 static boolean pickCordsOnce;
+static int gameState = 1;
+static int moves = 3;
 
 void setup(){
   size(600,600);
@@ -29,7 +31,8 @@ void setup(){
 void draw(){
 
    background(0);
-   
+   if (gameState == 1){
+   level.gameStateTrack();
    for(int i = 0; i < blocks.size(); i++)
     {
       Block block = blocks.get(i);
@@ -47,10 +50,16 @@ void draw(){
      if (enemies.size() < 1 && !playerMoving){
              level.updateLevel();
      }
+
+      }else if (gameState == 0){
+          println("SSSSSSSSSS");
+      }
 }
 
 void keyPressed(){
-
+   if (!playerMoving){
+                moves--;
+   }
 }
 
 void mouseClicked(){

@@ -8,6 +8,7 @@ class Level{
                level++;
                enemies.add(new Enemy());
            }
+           
   }
 
 
@@ -15,8 +16,16 @@ class Level{
         fill(255);
         textSize(20);
         text(level, 50, 50); 
+        text(moves, 100, 50); 
+        
         
   }
+  
+  void gameStateTrack(){
+      if (moves == -1){
+          gameState = 0;
+      }
+}
   
 }
   

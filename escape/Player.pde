@@ -21,7 +21,7 @@ class Player{
  void updatePlayer(){
    
    
-   if (key == 'a' && !right && !up && !down) left = true;
+   if (key == 'a' && !right && !up && !down) left = true; 
    if (key == 'w' && !down && !left && !right) up = true;
    if (key == 's' && !up && !left && !right) down = true;
    if (key == 'd' && !left && !up && !down) right = true; 
@@ -81,6 +81,7 @@ class Player{
                wallTouched = false;
                down = false;
                key = 'f';
+            
         }
      
    }
@@ -103,6 +104,7 @@ class Player{
             wallTouched = false;
             left = false;
             key = 'f';
+                 
         }
         
  }
