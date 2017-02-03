@@ -17,6 +17,7 @@ class Level{
         textSize(20);
         text(level, 50, 50); 
         text(moves, 100, 50); 
+        text(trianglePoints, 470, 50);
         
         
   }

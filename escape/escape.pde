@@ -12,7 +12,8 @@ static int[] xPositions = new int[7];
 static int[] yPositions = new int[7];
 static boolean pickCordsOnce;
 static int gameState = 1;
-static int moves = 20;
+static int moves = 200;
+static int trianglePoints;
 
 void setup(){
   size(600,600);

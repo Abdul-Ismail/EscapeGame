@@ -30,7 +30,7 @@ class miniTriangles{
      
   }
   
-  void drawMiniT(float miniX, float miniY){
+  boolean drawMiniT(float miniX, float miniY){
 
      miniX += moveX;
      miniY += moveY;
@@ -69,14 +69,15 @@ class miniTriangles{
             r++; 
          }
          
-         if (miniX > (collectionX + 10)-5 && miniX < (collectionX + 10) + 5 && miniY > (collectionY + 10) -5 && miniY < (collectionY+ 10) + 5){
-           println("SS");
-           //miniTs.remove(this);
+         if (newMiniX > (collectionX + 20)-10 && newMiniX < (collectionX + 10) + 10 && newMiniY > (collectionY + 10) -10 && newMiniY < (collectionY+ 10) + 10){
+           trianglePoints++;
+           return true;
+           
          }
                 
      }
      
-     
+       return false;
         
   }
 
@@ -85,5 +86,6 @@ class miniTriangles{
    collected = call;
    
  }
+ 
  
 }

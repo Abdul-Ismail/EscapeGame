@@ -22,6 +22,7 @@ class Block{
    float topTriangleY = 30;
    boolean trianglePackageOnce;
    boolean trianglePackageCollected;
+   boolean doneCollecting = false;
      
    
    
@@ -41,7 +42,8 @@ class Block{
    fill(255,43,56);
    playerInBlock();
      triangle(topTriangleX, topTriangleY, topTriangleX, topTriangleY + 20, topTriangleX + 20, topTriangleY + 10 );
-      if (type == 3 || trianglePackageCollected) arrowPackage();
+      if (trianglePackageCollected) arrowPackage();
+      
    if (alive && !enemyPresent){
         
       if (type == 1) rect(x,y,blockSize,blockSize);
@@ -108,13 +110,15 @@ void playerInBlock(){
     
        
               if (type == 3 && (yPlayer < rectYcenter + 1 && yPlayer > rectYcenter - 1) && (xPlayer < rectXcenter +1 && xPlayer > rectXcenter - 1)){
-                  trianglePackageCollected = true;
+                  
                   
                          for(int i = 0; i < miniTs.size(); i++)
                             {
                               miniTriangles miniT = miniTs.get(i);
                               miniT.collectedCall(true);
                             }
+                    trianglePackageCollected = true;
+                    type = 0 ;
                   
               }
 
@@ -173,6 +177,7 @@ void arrow(){
   }
   
   void arrowPackage(){
+    //println(trianglePackageOnce);
    if (!trianglePackageOnce){
     for (int i = 0; i < 5; i++){
         miniTs.add(new miniTriangles(tempX,tempY, topTriangleX, topTriangleY));
@@ -182,7 +187,17 @@ void arrow(){
         for(int i = 0; i < miniTs.size(); i++)
     {
         miniTriangles miniT = miniTs.get(i);
-        miniT.drawMiniT(tempX, tempY);
+        doneCollecting = miniT.drawMiniT(tempX, tempY);
+    
+    
+              if (doneCollecting){
+              //trianglePackageCollected = false;
+              //trianglePackageOnce = false;
+                            doneCollecting = false;
+              //println(miniTs.size());
+              miniTs.remove(i);
+
+          }
     }
   }
   
