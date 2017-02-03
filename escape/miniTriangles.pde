@@ -11,10 +11,13 @@ class miniTriangles{
   float relocationYSpeed;
   int moveX;
   int moveY;
+  float newMiniX;
+  float newMiniY;
+  boolean doOnce;
   
   miniTriangles(float x, float y, float x2, float y2){
-     miniX = x;
-     miniY = y;
+     newMiniX = x;
+     newMiniX = y;
      collectionX = x2;
      collectionY = y2;
      moveX += int(random(20,50));
@@ -28,11 +31,19 @@ class miniTriangles{
   }
   
   void drawMiniT(float miniX, float miniY){
+
      miniX += moveX;
      miniY += moveY;
+     
+     if (collected && !doOnce){
+         newMiniX = miniX;
+         newMiniY = miniY;
+         doOnce = true;
+     }
     
      pushMatrix();
-     translate(miniX , miniY );
+     if (!collected) translate(miniX , miniY );
+     if (collected) translate(newMiniX , newMiniY );
      rotate(radians(r));
      triangle(-10, 10, 0, -10, 10, 10); 
      popMatrix();   
@@ -44,11 +55,14 @@ class miniTriangles{
      }
      
      if (collected){
-         if (miniX < collectionX + 10){
-            miniX+=relocationXSpeed;
+        
+         if (newMiniX < collectionX + 10){
+            newMiniX+=relocationXSpeed;
+
+        
          }
-         if (miniY > collectionY + 10){
-            miniY-= relocationYSpeed;
+         if (newMiniY > collectionY + 10){
+            newMiniY-= relocationYSpeed;
          }
          
          if (r < 90){
@@ -69,7 +83,7 @@ class miniTriangles{
 
  void collectedCall(boolean call){
    collected = call;
-   println(collected);
+   
  }
  
 }
