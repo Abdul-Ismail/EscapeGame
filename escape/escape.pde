@@ -36,7 +36,6 @@ void draw(){
    background(0);
    if (gameState == 1){
    level.gameStateTrack();
-   packageDrop.dropPackage();
    for(int i = 0; i < blocks.size(); i++)
     {
       Block block = blocks.get(i);
@@ -54,6 +53,8 @@ void draw(){
      if (enemies.size() < 1 && !playerMoving){
              level.updateLevel();
      }
+     
+        packageDrop.selectPackage();
 
       }else if (gameState == 0){
           println("SSSSSSSSSS");
