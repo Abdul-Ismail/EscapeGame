@@ -192,11 +192,14 @@ void arrow(){
     
               if (doneCollecting){
               //trianglePackageCollected = false;
-              //trianglePackageOnce = false;
-                            doneCollecting = false;
+                doneCollecting = false;
               //println(miniTs.size());
               miniTs.remove(i);
 
+          }
+          
+          if (miniTs.size() <1 ){
+              trianglePackageCollected = false; 
           }
     }
   }
