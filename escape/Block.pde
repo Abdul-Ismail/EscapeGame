@@ -17,6 +17,7 @@ class Block{
    boolean doneRotatingTriangle = true;
    float rectXcenter;
    float rectYcenter;
+   
    boolean enemyPresent;
    float topTriangleX = 500;
    float topTriangleY = 30;
@@ -61,7 +62,7 @@ class Block{
 
         }
         
-    // if (x < 300){   
+ 
       if (tempX < x){
         if (type == 1) rect(tempX, tempY, blockSize, blockSize);
         if (type == 2) arrow();
@@ -69,7 +70,7 @@ class Block{
         tempX += 10;
         regenerating = true;
            if (triangleRotation < 90 * triangleRotation2){   
-       //triangleRotation += 30;
+                 //triangleRotation += 30;
            }
        }else{ 
          alive = true;  
@@ -77,7 +78,7 @@ class Block{
          key = 'l';
        }
      }
-  // }
+
    
   
 
@@ -176,6 +177,14 @@ void arrow(){
     
   }
   
+  float [] randomCords(){
+    float[] PostiontionForPlayerToReposition = new float[2];
+    PostiontionForPlayerToReposition[0] =  rectXcenter;
+    PostiontionForPlayerToReposition[1] =  rectYcenter;
+    return PostiontionForPlayerToReposition;
+    
+  }
+  
   void arrowPackage(){
     //println(trianglePackageOnce);
    if (!trianglePackageOnce){
@@ -202,6 +211,12 @@ void arrow(){
               trianglePackageCollected = false; 
           }
     }
+  }
+  
+  void swapWithPackage(int packageInserted){
+        tempX = x;
+        tempY = y;
+        type = packageInserted;
   }
   
 

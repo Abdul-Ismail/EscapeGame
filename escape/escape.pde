@@ -2,6 +2,7 @@ ArrayList<Block> blocks = new ArrayList<Block>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 Player player;
 Level level;
+mouseDrop packageDrop;
 
 static float xPlayer = 75;
 static float yPlayer = 115;
@@ -19,6 +20,7 @@ void setup(){
   size(600,600);
   player = new Player();
   level = new Level();
+  packageDrop = new mouseDrop();
     for (int i = 0; i < 7; i++){
       for (int j = 0; j < 7; j++){
         blocks.add(new Block(50+(j*70), 80+(i*70)));
@@ -34,6 +36,7 @@ void draw(){
    background(0);
    if (gameState == 1){
    level.gameStateTrack();
+   packageDrop.dropPackage();
    for(int i = 0; i < blocks.size(); i++)
     {
       Block block = blocks.get(i);
@@ -70,5 +73,7 @@ void mouseClicked(){
       Block block = blocks.get(i);
       block.updateArrow();;
     } 
+    
+    packageDrop.mouseClickedOnBlock();
   
 }

@@ -26,4 +26,8 @@ class Enemy{
              }
              ellipse(enemyPosition[0], enemyPosition[1], 60, 60);
   }
+  
+  //1 -5 normal, 10 moves
+  //4 - 10, 5 moves
+  //1- = 15 
 }
