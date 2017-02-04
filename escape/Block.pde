@@ -70,7 +70,7 @@ class Block{
         tempX += 10;
         regenerating = true;
            if (triangleRotation < 90 * triangleRotation2){   
-                 //triangleRotation += 30;
+                 //triangleRotation += 80;
            }
        }else{ 
          alive = true;  
@@ -143,7 +143,17 @@ void playerInBlock(){
     
         return true;
   }else return false;
+ 
 
+}
+
+ boolean overBlock(){
+    if (mouseX >= x && mouseX <= x+blockSize && 
+      mouseY >= y && mouseY <= y+blockSize) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 void arrow(){
@@ -161,8 +171,8 @@ void arrow(){
 }
   
   void updateArrow(){
-     boolean inBlock = withinBlock(mouseX, mouseY);
-    if (doneRotatingTriangle && inBlock){
+     boolean mouseInBlock = overBlock();
+    if (doneRotatingTriangle && mouseInBlock){
       triangleRotation2 = triangleRotation2 % 4 + 1;
       triangleRotation = triangleRotation2 * 90 - 90;
     }

@@ -34,7 +34,7 @@ class Player{
          
          
            Block block = blocks.get(newBlockPosition);
-           newPositions = block.randomCords(false);
+           newPositions = block.randomCords();
          pickCordsOnce = true;
    }
        

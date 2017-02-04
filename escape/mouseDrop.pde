@@ -23,7 +23,7 @@ class mouseDrop{
         for(int  i = 0; i < blocks.size(); i++)
           {
             Block block = blocks.get(i);
-             mouseInBlock = block.withinBlock(mouseX, mouseY); 
+             mouseInBlock = block.overBlock(); 
                 if (mouseInBlock){
                     dropPosition = block.randomCords();
                     block.swapWithPackage(2);   
@@ -37,9 +37,7 @@ class mouseDrop{
        float d = dist(500, 30, mouseX, mouseY);
          if (d < 25){
               pickedArrows = true;
-         }
-         println(pickedArrows);
-         
+         }       
   }
   
 }
