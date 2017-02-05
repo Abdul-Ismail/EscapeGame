@@ -4,17 +4,21 @@ class Enemy{
    int currentEnemies;
    boolean doneOnce;
    int cordsAt;
+   boolean enemyAtPickedCords;
    
    Enemy(){
       numberOfEnemies = 5;
-      cordsAt = int(random(1,49));
     }
   
   void drawEnemy(){
      if (!doneOnce){
+       cordsAt = int(random(1,49));
      Block block = blocks.get(cordsAt);
+           enemyAtPickedCords = block.checkIfEnemyIsPresent();
+            if (!enemyAtPickedCords){
            enemyPosition = block.randomCords(true);
            doneOnce = true;
+            }
      }
           
     currentEnemies++;
@@ -22,7 +26,7 @@ class Enemy{
              if(xPlayer == enemyPosition[0] && yPlayer == enemyPosition[1] ){
                Block block = blocks.get(cordsAt);
                block.randomCords(false);
-                enemies.remove(0);
+                enemies.remove(this);
              }
              ellipse(enemyPosition[0], enemyPosition[1], 60, 60);
   }

@@ -195,6 +195,11 @@ void arrow(){
     
   }
   
+  boolean checkIfEnemyIsPresent(){
+     if (enemyPresent) return true;
+      return false;
+  }
+  
   void arrowPackage(){
     //println(trianglePackageOnce);
    if (!trianglePackageOnce){

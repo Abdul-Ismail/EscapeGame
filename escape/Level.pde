@@ -7,6 +7,10 @@ class Level{
      if (level < 5){
                level++;
                enemies.add(new Enemy());
+               enemies.add(new Enemy());
+               enemies.add(new Enemy());
+               enemies.add(new Enemy());
+
            }
            
   }

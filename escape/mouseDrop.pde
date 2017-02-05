@@ -26,19 +26,20 @@ class mouseDrop{
              mouseInBlock = block.overBlock(); 
                 if (mouseInBlock){
                     dropPosition = block.randomCords();
-                    block.swapWithPackage(2);   
+                    block.swapWithPackage(2); 
+                    trianglePoints--;
                     pickedArrows = false;
                   }
           } 
        }
           
-          
-          if (!pickedArrows){
+
        float d = dist(500, 30, mouseX, mouseY);
-         if (d < 25){
-              pickedArrows = true;
-         }       
+         if (d < 30 && trianglePoints > 0){
+              pickedArrows = !pickedArrows;            
+         }else if(d < 30){
+           println("no arrows in inventory");
+         }
   }
   
-}
 }
